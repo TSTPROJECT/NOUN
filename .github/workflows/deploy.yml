@@ -34,12 +34,23 @@ jobs:
       - name: Type check and build
         run: npm run build
 
-      # The branch only ever holds the latest build, so it is replaced on each deploy.
+      # The branch holds the latest build plus the previous build's assets.
+      # GitHub Pages lets browsers cache index.html for 10 minutes, so a visitor
+      # may still load the old page right after a deploy; keeping the files it
+      # points to means they see the previous version instead of a blank page.
       - name: Publish dist to gh-pages
         working-directory: dist
         env:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          if git clone -q --depth 1 --branch gh-pages "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" ../previous; then
+            for f in $(grep -o 'assets/[^"]*' ../previous/index.html | sort -u); do
+              if [ ! -f "$f" ] && [ -f "../previous/$f" ]; then
+                cp "../previous/$f" "$f"
+                echo "kept previous $f"
+              fi
+            done
+          fi
           touch .nojekyll
           git init -q -b gh-pages
           git config user.name "github-actions[bot]"
