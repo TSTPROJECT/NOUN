@@ -1,0 +1,125 @@
+/* ---------- window chrome ---------- */
+
+.win {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: linear-gradient(180deg, rgba(17, 28, 43, 0.92), rgba(12, 20, 32, 0.92));
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  box-shadow:
+    0 1px 0 rgba(183, 199, 216, 0.05) inset,
+    0 18px 40px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+
+.win__bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+  padding: 0 12px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(38, 55, 75, 0.35);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--text-2);
+}
+
+.win__lights {
+  display: inline-flex;
+  gap: 5px;
+}
+
+.win__lights i {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--c-slate);
+}
+
+.win__lights i:first-child {
+  background: var(--c-steel);
+}
+
+.win__icon {
+  display: inline-flex;
+  color: var(--c-ice);
+}
+
+.win__title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.win__actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.win__body {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  padding: 18px;
+}
+
+/* ---------- digital clock ---------- */
+
+.clock {
+  display: inline-flex;
+  flex-direction: column;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.clock time {
+  display: inline-flex;
+  align-items: baseline;
+  color: var(--c-white);
+  font-weight: 500;
+}
+
+.clock__sep {
+  color: var(--c-steel);
+  margin: 0 1px;
+  animation: blink 2s steps(1) infinite;
+}
+
+.clock__sec {
+  color: var(--c-ice);
+  text-shadow: 0 0 14px rgba(101, 200, 237, 0.45);
+}
+
+.clock__date {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--text-3);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.clock--s {
+  font-size: 14px;
+}
+
+.clock--m {
+  font-size: 22px;
+}
+
+.clock--l {
+  font-size: clamp(34px, 5vw, 52px);
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.35;
+  }
+}
