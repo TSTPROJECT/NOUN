@@ -101,6 +101,7 @@ src/styles/global.css       palette tokens, base styles, shared UI
 `vite.config.ts` uses `base: './'`, so the build works at any path, including `https://<user>.github.io/<repo>/`, with no changes.
 
 1. Create a new, empty GitHub repository for this project (keep it separate from other character sites).
-2. Push this folder to its `main` branch.
-3. In the repository: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-4. Each push to `main` runs `.github/workflows/deploy.yml` (install → type check → build → deploy `dist/`).
+2. Push this folder to its `main` branch. Each push runs `.github/workflows/deploy.yml`: install → type check → build → publish `dist/` to the `gh-pages` branch.
+3. In the repository: **Settings → Pages → Build and deployment → Source: Deploy from a branch**, **Branch: `gh-pages` / (root)**.
+
+Do not point Pages at `main`: that branch holds the source, not the built site, and the page would load blank.
